@@ -1,0 +1,44 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 20px;
+  color: yellow
+}
+
+input {
+  padding: 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: pink;
+  color: black;
+  border: none;
+  border-radius: 4px;
+}
+
+button:hover {
+  color: red;
+}
+
+#pokemon-container {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  background-color: #000000;
+  display: inline-block;
+}
+
+img{
+  background-color: pink;
+  width: 150px;
+  height: 150px;
+}
+
+
