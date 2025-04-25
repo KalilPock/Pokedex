@@ -3,6 +3,13 @@ body {
   background-color: purple;
 }
 
+button{
+  border-radius: 15px;
+  background-color: blue;
+  color: white;
+  padding: 10px;
+}
+
 button:active{
   background-color: green;
 }
