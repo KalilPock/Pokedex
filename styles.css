@@ -3,6 +3,26 @@ body {
   background-color: purple;
 }
 
+tela{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+input{
+  background-color: white;
+  border-radius: 15px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+pokemon-container{
+  display: inline-block;
+  margin: 10px;
+  border-radius: 20px;
+  background-color: lightblue;
+}
+
 button{
   border-radius: 15px;
   background-color: blue;
