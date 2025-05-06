@@ -3,12 +3,6 @@ body {
   background-color: purple;
 }
 
-tela{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
 input{
   background-color: white;
   border-radius: 15px;
