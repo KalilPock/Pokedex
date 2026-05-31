@@ -5,7 +5,7 @@ body {
 
 input{
   background-color: white;
-  border-radius: 15px;
+  border-radius: 5px;
   padding: 10px;
   margin-bottom: 20px;
 }
@@ -13,12 +13,12 @@ input{
 pokemon-container{
   display: inline-block;
   margin: 10px;
-  border-radius: 20px;
+  border-radius: 50px;
   background-color: lightblue;
 }
 
 button{
-  border-radius: 15px;
+  border-radius: 5px;
   background-color: blue;
   color: white;
   padding: 10px;
