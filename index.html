@@ -4,50 +4,85 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pokémon Finder</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <style>
-    body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
-    input { padding: 5px; font-size: 16px; }
-    button { padding: 10px; font-size: 16px; cursor: pointer; }
-    #pokemon-container { margin-top: 20px; }
-    img { width: 150px; height: 150px; }
-  </style>
 </head>
 
 <body>
+  <h1>🔍 Pokémon Finder</h1>
+  
+  <div class="nav-container">
+    <a href="index.html" class="nav-btn active">Buscar</a>
+    <a href="pokedex.html" class="nav-btn">Pokédex</a>
+  </div>
 
-  <div id = "tela"> 
-    <h1>Encontre um Pokémon! 🔍</h1>
-    <input type="text" id="pokemon-name" placeholder="Digite um Pokémon (ex: pikachu)">
-    <button onclick="buscarPokemon()">Buscar</button>
-    <div id="pokemon-container">
-      <h2 id="nome"></h2>
-      <img id="imagem" src="" alt="">
-      <p id="info"></p>
+  <div id="tela"> 
+    <div class="search-box">
+      <input 
+        type="text" 
+        id="pokemon-name" 
+        placeholder="Pikachu, Bulbassauro, Charmander..." 
+        onkeypress="if(event.key === 'Enter') buscarPokemon()"
+        autocomplete="off"
+      >
+      <button onclick="buscarPokemon()">🔍 Buscar</button>
     </div>
+
+    <div id="pokemon-container"></div>
   </div>
 
   <script>
     function buscarPokemon() {
-      const nome = document.getElementById("pokemon-name").value.toLowerCase();
+      const nome = document.getElementById("pokemon-name").value.toLowerCase().trim();
+      const container = document.getElementById("pokemon-container");
+      
+      if (!nome) {
+        container.innerHTML = '<div class="result-card"><p style="color: #FF6B6B; font-weight: 600;">😅 Digite o nome de um Pokémon!</p></div>';
+        return;
+      }
+
+      container.innerHTML = '<div class="result-card"><p style="color: #666;">⏳ Procurando...</p></div>';
+
       fetch(`https://pokeapi.co/api/v2/pokemon/${nome}`)
         .then(response => {
           if (!response.ok) {
-            throw new Error("Pokémon não encontrado!");
+            throw new Error("Não encontrado!");
           }
           return response.json();
         })
         .then(data => {
-          document.getElementById("nome").innerText = data.name.toUpperCase();
-          document.getElementById("imagem").src = data.sprites.front_default;
-          document.getElementById("info").innerText = `Tipo: ${data.types.map(t => t.type.name).join(", ")}`;
+          const tipos = data.types.map(t => t.type.name).join(", ");
+          const altura = (data.height / 10).toFixed(1);
+          const peso = (data.weight / 10).toFixed(1);
+          const exp = data.base_experience;
+          
+          container.innerHTML = `
+            <div class="result-card">
+              <h2 id="nome">#${data.id} - ${data.name.toUpperCase()}</h2>
+              <img id="imagem" src="${data.sprites.front_default}" alt="${data.name}">
+              <div id="info">
+                <p><strong>🏷️ Tipo:</strong> ${tipos}</p>
+                <p><strong>📏 Altura:</strong> ${altura}m</p>
+                <p><strong>⚖️ Peso:</strong> ${peso}kg</p>
+                <p><strong>⭐ Experiência:</strong> ${exp}</p>
+              </div>
+            </div>
+          `;
         })
         .catch(error => {
-          document.getElementById("nome").innerText = "Erro!";
-          document.getElementById("imagem").src = "";
-          document.getElementById("info").innerText = "Pokémon não encontrado. Tente outro nome.";
+          container.innerHTML = `
+            <div class="result-card">
+              <h2 id="nome">❌ Não encontrado!</h2>
+              <p style="color: #666; margin-top: 15px;">Tente verificar o nome e tente novamente.</p>
+            </div>
+          `;
         });
     }
+
+    // Busca sugerida ao carregar
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById("pokemon-name").focus();
+    });
   </script>
 </body>
 </html>
