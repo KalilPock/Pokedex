@@ -1,6 +1,6 @@
 body {
   padding: 5px;
-  background-color: purple;
+  background-color: gray;
 }
 
 input{
@@ -27,4 +27,16 @@ button{
 button:active{
   background-color: green;
 }
+.container{
+  display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
 
+}
+
+.card{  
+  padding: 5px;
+  background-color: aliceblue;
+  border-radius: 5px;
+  border-color: black;
+  text-align: center;
+}
